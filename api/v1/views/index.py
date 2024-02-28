@@ -7,15 +7,16 @@ from models import storage
 def status():
     return jsonify({"status": "OK"})
 
-app = Flask(__name__)
-
 @app.route('/api/v1/stats', methods=['GET'])
 def get_stats():
-    counts = {}
-    counts['objects'] = {}
-    counts['object']['Object1'] = storage.count('Object1')
-    counts['object']['Object2'] = storage.count('Object2')
-    counts['object']['Object3'] = storage.count('Object3')
+    stats = {
+        'amenities': storage.count('amenities'),
+        'cities': storage.count('cities'),
+        'places': storage.count('places'),
+        'reiews': storage.count('reiews'),
+        'states': storage.count('states'),
+        'users': storage.count('users'),
+    }
     return jsonify(counts)
 
 if __name__ == '__main__':
